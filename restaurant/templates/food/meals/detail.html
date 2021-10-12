@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+  {{ meal.name }}
+{% endblock %}
+
+{% block content %}
+  <div class="meal-detail">
+    <img src="{% if meal.image %}{{ meal.image.url }}{% else %}
+    {% static "img/no_image.png" %}{% endif %}">
+    <h1>{{ meal.name }}</h1>
+    <h2>
+      <a href="{{ meal.category.get_absolute_url }}">
+        {{ meal.category }}
+      </a>
+    </h2>
+    <p class="price">${{ meal.price }}</p>
+    <p class="description">${{ meal.description }}</p>
+{#    <form action="{% url "cart:cart_add" product.id %}" method="post">#}
+{#      {{ cart_product_form }}#}
+{#      {% csrf_token %}#}
+{#      <input type="submit" value="Dodaj do koszyka">#}
+{#    </form>#}
+    {{ product.description|linebreaks }}
+  </div>
+{% endblock %}

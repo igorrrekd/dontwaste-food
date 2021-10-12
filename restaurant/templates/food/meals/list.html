@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    {% if category %}{{ category.name }}{% else %}Posiłki{% endif %}
+{% endblock %}
+
+{% block content %}
+    <div id="sidebar">
+    <h3>Kategorie</h3>
+    <ul>
+      <li {% if not category %}class="selected"{% endif %}>
+        <a href="{% url "restaurant:meal_list" %}">Wszystkie</a>
+      </li>
+      {% for c in categories %}
+        <li {% if category.slug == c.slug %}class="selected"{% endif %}>
+          <a href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div id="main" class="meal-list">
+    <h1>{% if category %}{{ category.name }}{% else %}Produkty{% endif %}</h1>
+    {% for meal in meals %}
+      <div class="item">
+        <a href="{{ meal.get_absolute_url }}">
+          <img src="{% if meal.image %}{{ meal.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+        </a>
+        <a href="{{ meal.get_absolute_url }}">{{ meal.name }}</a>
+        <br>
+        ${{ meal.price }}
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

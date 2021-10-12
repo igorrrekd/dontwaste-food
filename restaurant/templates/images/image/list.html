@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Lista restauracji{% endblock %}
+
+
+{% block content %}
+    {% for restaurant in rest %}
+        <h2><a href="{{ restaurant.get_absolute_url }}">{{ restaurant.name }}</a>
+        </h2>
+        <h1>{{ restaurant.description }}</h1>
+        {% if restaurant.image %}
+    <img src="{{ restaurant.image.url }}" class="restaurant_view">
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+
+
+{#{% extends "base.html" %}#}
+{##}
+{#{% block title %}{{ restaurant.title }}{% endblock %}#}
+{##}
+{#{% block content %}#}
+{#  <h1>{{ restaurant.title }}</h1>#}
+{#  {% load thumbnail %}#}
+{#  <a href="{{ restaurant.image.url }}">#}
+{#    <img src="{% thumbnail image.image 300x0 %}" class="image-detail">#}
+{#  </a>#}
+{#  {% with total_likes=restaurant.users_like.count users_like=restaurant.users_like.all %}#}
+{#    <div class="image-info">#}
+{#      <div>#}
+{#        <span class="count">#}
+{#          <span class="total">{{ total_likes }}</span>#}
+{#          lubi{{ total_likes|pluralize }}#}
+{#        </span>#}
+{#        <a href="#" data-id="{{ restaurant.id }}" data-action="{% if request.user in users_like %}un{% endif %}like" class="like button">#}
+{#          {% if request.user not in users_like %}#}
+{#            Lubię#}
+{#          {% else %}#}
+{#           Nie lubię#}
+{#          {% endif %}#}
+{#        </a>#}
+{#      </div>#}
+{#      {{ restaurant.description|linebreaks }}#}
+{#    </div>#}
+{#    <div class="image-likes">#}
+{#      {% for user in users_like %}#}
+{#        <div>#}
+{#          <img src="{{ user.profile.photo.url }}">#}
+{#          <p>{{ user.first_name }}</p>#}
+{#        </div>#}
+{#      {% empty %}#}
+{#        Nikt jeszcze nie polubił tego obrazu#}
+{#      {% endfor %}#}
+{#    </div>#}
+{#  {% endwith %}#}
+{#{% endblock %}#}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Dodaj restaurację{% endblock %}
+
+{% block content %}
+  <h1>Dodaj restaurację</h1>
+  <img src="{{ request.GET.url }}" class="image-preview">
+  <form method="POST" enctype="multipart/form-data"> {% csrf_token %}
+    {{ form.as_p }}
+    {% csrf_token %}
+    <button type="submit" class="save">Dodaj</button>
+  </form>
+{% endblock %}
