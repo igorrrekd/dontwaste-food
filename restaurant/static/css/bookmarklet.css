@@ -125,3 +125,21 @@
 .meal-detail h2 {
     margin-top:10px;
 }
+
+.restaurant-detail {
+    text-align: justify;
+}
+
+.text-right {
+    text-align:right;
+}
+
+tbody td.num {
+    text-align: right;
+}
+
+thead th, tbody tr.total {
+    background:#5993bb;
+    color:#fff;
+    font-weight:bold;
+}

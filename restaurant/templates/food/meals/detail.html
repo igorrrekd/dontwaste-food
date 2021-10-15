@@ -17,11 +17,11 @@
     </h2>
     <p class="price">${{ meal.price }}</p>
     <p class="description">${{ meal.description }}</p>
-{#    <form action="{% url "cart:cart_add" product.id %}" method="post">#}
-{#      {{ cart_product_form }}#}
-{#      {% csrf_token %}#}
-{#      <input type="submit" value="Dodaj do koszyka">#}
-{#    </form>#}
-    {{ product.description|linebreaks }}
+    <form action="{% url "cart:cart_add" meal.id %}" method="post">
+      {{ cart_meal_form }}
+      {% csrf_token %}
+      <input type="submit" value="Dodaj do koszyka">
+    </form>
+    {{ meal.description|linebreaks }}
   </div>
 {% endblock %}

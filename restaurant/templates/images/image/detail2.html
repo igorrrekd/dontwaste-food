@@ -1,13 +1,24 @@
 {% extends "base.html" %}
+{% load static %}
 
-{% block title %}{{ restaurant.name }}{% endblock %}
-
-{% block content %}
-  <h1>{{ restaurant.name }}</h1>
-    {% if restaurant.menu %}
-        <img src="{{ restaurant.menu.url }}" class="restaurant_detail">
-    {% endif %}
-    <h1>{{ restaurant.description }}</h1>
+{% block title %}
+  {{ res.name }}
 {% endblock %}
 
+{% block content %}
+  <div class="restaurant-detail">
+    <img src="{% if res.menu %}{{ res.menu.url }}{% else %}
+    {% static "img/menu.png" %}{% endif %}">
+    <h1>{{ res.name }}</h1>
+    <h2>{{ res.description }}</h2>
+    <p class="price">${{ res.city }}</p>
+    <p class="description">${{ res.url }}</p>
+{#    <form action="{% url "cart:cart_add" product.id %}" method="post">#}
+{#      {{ cart_product_form }}#}
+{#      {% csrf_token %}#}
+{#      <input type="submit" value="Dodaj do koszyka">#}
+{#    </form>#}
+    {{ res.description|linebreaks }}
+  </div>
+{% endblock %}
 

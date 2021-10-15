@@ -11,6 +11,7 @@ from django.core.paginator import Paginator, EmptyPage, \
     PageNotAnInteger
 # from common.decorators import ajax_required
 from .forms import RestaurantCreateForm
+from cart.forms import CartAddMealForm
 from .models import Restaurant, Category, Meal
 
 
@@ -49,9 +50,9 @@ def restaurant_list(request):
 
 
 @login_required
-def restaurant_detail(request, name):
+def restaurant_detail(request, name, description, menu, city, url):
     res = get_object_or_404(Restaurant,
-                            name=name,
+                            name=name, description=description, menu=menu, city=city, url=url,
                             is_active=True)
     return render(request,
                   'images/image/detail2.html',
@@ -85,10 +86,12 @@ def meal_detail(request, id, slug):
                              id=id,
                              slug=slug,
                              available=True)
+    cart_meal_form = CartAddMealForm()
+
     return render(request,
                   'food/meals/detail.html',
-                  {'meal': meal})
-
+                  {'meal': meal,
+                   'cart_meal_form': cart_meal_form})
 
 
 

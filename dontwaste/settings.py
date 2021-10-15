@@ -18,7 +18,6 @@ from django.conf import settings
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
@@ -29,7 +28,6 @@ SECRET_KEY = '9ccw8&#5ny*=lsw3qwpp^07s^^#a-4(g&%_69&2e8p=wh_&u!x'
 DEBUG = True
 
 ALLOWED_HOSTS = ['dontwaste-food.pl', 'localhost', '127.0.0.1']
-
 
 # Application definition
 
@@ -45,7 +43,9 @@ INSTALLED_APPS = [
     'django_extensions',
     'location_field.apps.DefaultConfig',
     'restaurant.apps.RestaurantConfig',
-    'easy_thumbnails'
+    'easy_thumbnails',
+    'cart.apps.CartConfig',
+    'orders.apps.OrdersConfig',
 ]
 
 MIDDLEWARE = [
@@ -71,13 +71,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processors.cart',
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'dontwaste.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -91,8 +91,6 @@ DATABASES = {
         'PASSWORD': 'coderslab',
     }
 }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -112,7 +110,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
@@ -125,7 +122,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
@@ -154,20 +150,18 @@ AUTHENTICATION_BACKENDS = [
     'social_core.backends.google.GoogleOAuth2'
 ]
 
+# 'social_core.backends.twitter.TwitterOAuth',
+# 'social_core.backends.google.GoogleOAuth2',
 
-    # 'social_core.backends.twitter.TwitterOAuth',
-    # 'social_core.backends.google.GoogleOAuth2',
-
-SOCIAL_AUTH_FACEBOOK_KEY = '1798506060537745' # Facebook App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = '0369123623215acd7fccbbc84cf3bcd0' # Facebook App Secret
+SOCIAL_AUTH_FACEBOOK_KEY = '1798506060537745'  # Facebook App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = '0369123623215acd7fccbbc84cf3bcd0'  # Facebook App Secret
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['igorrrekd@gmail.com']
 
-SOCIAL_AUTH_TWITTER_KEY = '' # Twitter API Key
-SOCIAL_AUTH_TWITTER_SECRET = '' # Twitter API Secret
+SOCIAL_AUTH_TWITTER_KEY = ''  # Twitter API Key
+SOCIAL_AUTH_TWITTER_SECRET = ''  # Twitter API Secret
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '585089939369-gc7fgipt998qnbh3brho6uff0l4pgiu0.apps.googleusercontent.com' # Google Consumer Key
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '1VrFeM8nGkJAK_h47an1THj8' # Google Consumer Secret
-
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '585089939369-gc7fgipt998qnbh3brho6uff0l4pgiu0.apps.googleusercontent.com'  # Google Consumer Key
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '1VrFeM8nGkJAK_h47an1THj8'  # Google Consumer Secret
 
 # LOCATION_FIELD = {
 #     'provider.google.api': '//maps.google.com/maps/api/js?sensor=false',
@@ -206,3 +200,5 @@ LOCATION_FIELD = {
         ),
     },
 }
+
+CART_SESSION_ID = 'cart'
